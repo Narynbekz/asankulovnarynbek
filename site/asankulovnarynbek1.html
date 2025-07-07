@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      integrity="sha512-m29K3YB+…"
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>John Doe - Software Engineer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            
+        }
+
+        .cv-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin: 0 auto 30px;
+            background-image: url('image/profile.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            z-index: 1;
+            transition: transform 0.3s ease;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.1);
+        }
+
+        .name {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .title {
+            font-size: 1.3em;
+            opacity: 0.9;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 0.9em;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-2px);
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+
+        .left-column, .right-column {
+            padding: 40px;
+        }
+
+        .left-column {
+            background: #f8f9fa;
+            border-right: 1px solid #e9ecef;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #3498db;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: #e74c3c;
+        }
+
+        .description {
+            font-size: 1em;
+            color: #555;
+        }
+
+        .skill-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 12px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .skill-item:hover {
+            transform: translateX(5px);
+        }
+
+        .skill-name {
+            font-weight: bold;
+            width: 100%;
+        }
+
+        .skill-bar {
+            width: 60px;
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .skill-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+            border-radius: 4px;
+            transition: width 2s ease;
+        }
+
+        .experience-item, .education-item {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #3498db;
+            transition: transform 0.3s ease;
+        }
+
+        .experience-item:hover, .education-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .item-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .item-company, .item-school {
+            font-weight: bold;
+            color: #3498db;
+            margin-bottom: 5px;
+        }
+
+        .item-date {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+
+        .item-description {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        
+        .languages {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .language-tag {
+            background: #3498db;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            transition: background 0.3s ease;
+        }
+
+        .language-tag:hover {
+            background: #2980b9;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .left-column {
+                border-right: none;
+                border-bottom: 1px solid #e9ecef;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .name {
+                font-size: 2em;
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+
+        :root { --icon-size: 50px; }
+
+  .social-links { display: flex; gap: 20px; }
+        .achievement-item {
+            margin-bottom: 15px;
+            padding: 15px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .achievement-item:hover {
+            transform: scale(1.02);
+        }
+
+
+  .social-btn {
+    width: var(--icon-size);
+    height: var(--icon-size);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    text-decoration: none;
+    font-size: calc(var(--icon-size) * 0.55);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .social-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
+  }
+  .telegram  { background: #26A5E4; }
+  .whatsapp  { background: #25D366; }
+
+:root { --icon-size: 48px; }
+
+  /* общий контейнер */
+  .social-links{
+    display:flex;
+    justify-content:center; /* по центру */
+    align-items:center;
+    gap:24px;
+    flex-wrap:wrap;
+  }
+  /* кнопки-иконки */
+  .social-btn{
+    width:var(--icon-size);
+    height:var(--icon-size);
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:#fff;
+    text-decoration:none;
+    font-size:calc(var(--icon-size)*0.55);
+    transition:transform .2s, box-shadow .2s;
+  }
+  .social-btn:hover{
+    transform:translateY(-4px);
+    box-shadow:0 6px 12px rgba(0,0,0,.12);
+  }
+  .telegram{background:#26A5E4;}
+  .whatsapp{background:#25D366;}
+
+  /* блок «город + текст» */
+  .city{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    font-size:calc(var(--icon-size)*0.45);
+    color:#bbbbbb;
+  }
+  .city i{
+    color:#7299a2;
+    font-size:calc(var(--icon-size)*0.55);
+  }
+
+
+  @media (max-width:480px){
+    :root{ --icon-size:40px; }
+    .social-links{ gap:16px; }
+    .container{
+        padding: 0;
+    }
+    .cv-card{
+        border-radius: 0;
+    }
+     .left-column, .right-column {
+            padding: 10px;
+        }
+  }
+  
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="cv-card">
+            <div class="header">
+                <div class="profile-img"></div>
+                <h1 class="name">Асанкулов Нарынбек</h1>
+                <h2 class="title">Учитель ОРТ</h2>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        
+                     
+<!-- ===== Вставьте в <head> вашего файла ===== -->
+
+<!-- ===== Вставьте туда, где нужны иконки (внутри <body>) ===== -->
+<div class="social-links">
+  <a class="social-btn telegram" href="https://t.me/Narynbek1" target="_blank" aria-label="Telegram">
+    <i class="fa-brands fa-telegram"></i>
+  </a>
+  <a class="social-btn whatsapp" href="https://wa.me/996709954657" target="_blank" aria-label="WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+  <div class="city">
+    <i class="fa-solid fa-location-dot"></i>
+    <span>Бишкек</span>
+  </div>
+</div>
+
+
+                    </div>
+                </div>
+            </div>
+            
+
+            <div class="main-content">
+                <div class="left-column">
+                    <div class="section fade-in">
+                        <h3 class="section-title">О себе</h3>
+                        <p class="description">
+Опытный преподаватель подготовки к ОРТ: легко объясняю сложные темы на «языке учащихся», быстро адаптирую методику к уровню и динамике класса, выстраиваю доверительные отношения с каждым школьником. Строго придерживаюсь учебного плана и сроков, повышаю мотивацию через практико-ориентированные задания и мини-тесты. Серьёзно отношусь к работе, регулярно обновляю авторские материалы, использую цифровые инструменты для повышения вовлечённости. Ориентирован на результат: выпускники стабильно улучшают баллы.                        </p>
+                    </div>
+
+                    <div class="section fade-in">
+                        <h3 class="section-title">Навыки</h3>
+                        <div class="skill-item">
+                            <span class="skill-name">Методическая адаптация материалов под разные уровни класса
+
+</span>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="width: 100%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Диагностическая работа: составление мини-тестов, анализ результатов, коррекция курса
+
+</span>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="width: 100%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Базовые навыки аналитики данных (Google Sheets / Excel) для отслеживания прогресса
+
+</span>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="width: 100%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Работа с интерактивными платформами (Google Classroom, Kahoot, Quizizz, Classtime)
+
+</span>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Наставничество и поддержка (коучинговый подход)
+
+</span>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <div class="section fade-in">
+                        <h3 class="section-title">Языки</h3>
+                        <div class="languages">
+                            <span class="language-tag">Русский</span>
+                            <span class="language-tag">Кыргызкий</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="right-column">
+                    <div class="section fade-in">
+                        <h3 class="section-title">Опыт работы</h3>
+                        <div class="experience-item">
+                            <div class="item-title">Учитель математики, аналогии</div>
+                            <div class="item-company">Город Узген</div>
+                            <div class="item-date">1 месяц</div>
+                            <div class="item-description">
+Наемный учителель по ОРТ в госсударственной школе.                            </div>
+                        </div>
+                        <div class="experience-item">
+                            <div class="item-title">Учитель математики, аналогии, ЧП</div>
+                            <div class="item-company">Город ОШ</div>
+                            <div class="item-date">1 месяц</div>
+                            <div class="item-description">
+Интенсивный курс 1 - поток.                            </div>
+                        </div>
+                        <div class="experience-item">
+                            <div class="item-title">Учитель математики, аналогии, ЧП, грамматики русского языка</div>
+                            <div class="item-company">Город ОШ</div>
+                            <div class="item-date">3 месяца</div>
+                            <div class="item-description">
+VIP (полный курс).                             </div>
+                        </div>
+                        <div class="experience-item">
+                            <div class="item-title">Учитель математики, аналогии</div>
+                            <div class="item-company">Город ОШ</div>
+                            <div class="item-date">1 месяц</div>
+                            <div class="item-description">
+Интенсивный курс завершающий поток.                            </div>
+
+                        </div>
+                        <div class="experience-item">
+                            <div class="item-title">Учитель математики на кыргызком языке</div>
+                            <div class="item-company">Город ОШ</div>
+                            <div class="item-date">1 месяц</div>
+                            <div class="item-description">
+Интенсивный курс завершающий поток.                            </div>
+                        </div>
+                        <div class="experience-item">
+                            <div class="item-title">Автор курса</div>
+                            <div class="item-date">1 месяц</div>
+                            <div class="item-description">
+Создание видеоуроков по собственному плану.                            </div>
+                    </div>
+
+                    <div class="section fade-in">
+                        <h3 class="section-title">Образование</h3>
+                        <div class="education-item">
+                            <div class="item-school">Нарынский турецкий лицей им "М. Субакожоева" </div>
+                            <div class="item-date">2024</div>
+                            <div class="item-description">
+                                Направление - физмат
+                            </div>
+                        </div>
+                        <div class="education-item">
+                            <div class="item-school">Треннинги</div>
+                            <div class="item-description">
+Повышение квалификации для преподавателей                          </div>
+                        </div>
+                    </div>
+<div class="section fade-in">
+                        <h3 class="section-title">Результаты</h3>
+                        <div class="achievement-item">
+                            ОРТ - 203 (2024)
+                        </div>
+                        <div class="achievement-item">
+                            Зимний ОРТ - 206 (2024)
+                        </div>
+                        <div class="achievement-item">
+                            ОРТ - 214 (2025)
+                        </div>
+                
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Animate skill bars on load
+        window.addEventListener('load', function() {
+            const skillFills = document.querySelectorAll('.skill-fill');
+            skillFills.forEach(fill => {
+                const width = fill.style.width;
+                fill.style.width = '0%';
+                setTimeout(() => {
+                    fill.style.width = width;
+                }, 500);
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scrolling for any future navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add some interactive hover effects
+        document.querySelectorAll('.experience-item, .education-item, .skill-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body>
+</html>
